@@ -72,6 +72,8 @@
      <Compile Include="Assets\BasicBandit\DemoSceneBasicBandit\Scripts\MovementCamera.cs" />
      <Compile Include="Assets\Scipts\QuestObj.cs" />
      <Compile Include="Assets\SimpleSkeletonFree\Script\Character\PlayerController.cs" />
+     <Compile Include="Assets\Scipts\WeaponScript.cs" />
+     <Compile Include="Assets\Scipts\Hitbox.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

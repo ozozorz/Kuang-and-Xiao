@@ -6,5 +6,9 @@ using UnityEngine;
 public class ObjectData : ScriptableObject
 {
     public Sprite sprite;
+    public GameObject weaponPrefab;
+    public GameObject groundItem;
+    public float AttackSpeed;
+    public float AttackDamage;
 
 }

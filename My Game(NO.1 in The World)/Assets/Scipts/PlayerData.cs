@@ -16,6 +16,8 @@ public class PlayerData : MonoBehaviour
     public float curHealth;
 
     public ObjectData[] Hotbar;
+    public ObjectData[] Inventory;
+    public Image[] inventorySlots;
     public Image[] hotabrSlots;
     public Image[] BackgroundSlots;
 
@@ -33,6 +35,7 @@ public class PlayerData : MonoBehaviour
     public int moveToSlot;
     public ObjectData data;
     public int parentItem;
+    public bool isInInventory;
 
     public GameObject DraggingSprite;
 
@@ -41,6 +44,14 @@ public class PlayerData : MonoBehaviour
     private GameObject TempDragObj;
 
     private UIManager manager;
+
+    public GameObject cameraObj;
+
+    public Transform dropArea;
+
+    public TextMeshProUGUI triggertext;
+
+    private GameObject CurrentEquipped;
     
     public void Start()
     {
@@ -52,6 +63,7 @@ public class PlayerData : MonoBehaviour
         EquipHotbar();
     }
 
+ 
     public void EquipHotbar()
     {
         for (int i = 0; i < BackgroundSlots.Length; i++)
@@ -59,6 +71,19 @@ public class PlayerData : MonoBehaviour
             if (i == curEquipped)
             {
                 BackgroundSlots[i].color = equippedColor;
+
+                if (Hotbar[i] != null)
+                {
+                    Destroy(CurrentEquipped);
+                    CurrentEquipped = Instantiate(Hotbar[i].weaponPrefab, transform.position, transform.rotation);
+                    CurrentEquipped.transform.SetParent(cameraObj.transform);
+                    CurrentEquipped.transform.localPosition = Hotbar[i].weaponPrefab.transform.position;
+                    CurrentEquipped.transform.localRotation = Hotbar[i].weaponPrefab.transform.rotation;
+                }
+                else
+                {
+                    Destroy(CurrentEquipped);
+                }
             }
             else
             {
@@ -81,7 +106,7 @@ public class PlayerData : MonoBehaviour
                 {
                     curEquipped--;
                 }
-
+                
                 EquipHotbar();
             }
             else if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
@@ -99,6 +124,17 @@ public class PlayerData : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (Hotbar[curEquipped] != null)
+            {
+                Instantiate(Hotbar[curEquipped].groundItem, dropArea.position, dropArea.rotation);
+                Hotbar[curEquipped] = null;
+                ReloadHotbar();
+                EquipHotbar();
+            }
+        }
+        
         if (TempDragObj != null)
         {
             TempDragObj.transform.position = Vector2.Lerp(TempDragObj.transform.position, Input.mousePosition, 0.3f);
@@ -133,6 +169,24 @@ public class PlayerData : MonoBehaviour
             
         }
     }
+    
+    public void ReloadInventory()
+    {
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            if (Inventory[i] != null)
+            {
+                inventorySlots[i].sprite = Inventory[i].sprite;
+                inventorySlots[i].color = new Color(255, 255, 255, 255);
+            }
+            else
+            {
+                inventorySlots[i].sprite = null;
+                inventorySlots[i].color = new Color(0, 0, 0, 0);
+            }
+            
+        }
+    }
 
     public void Heal(float Health)
     {
@@ -145,32 +199,68 @@ public class PlayerData : MonoBehaviour
         healthText.text = curHealth.ToString("F0") + "/" + MaxHealth.ToString("F0");
     }
 
-    public void DragItem(int indexNum, ObjectData passingObj)
+    public void DragItem(int indexNum, ObjectData passingObj, bool isInventory)
     {
         if (!isDragged)
         {
-            isDragged = true;
-            moveToSlot = indexNum;
-            Hotbar[indexNum] = null;
-            data = passingObj;
-            ReloadHotbar();
-            hotabrSlots[indexNum].gameObject.GetComponent<Slot>().Objdata = null;
+            if (passingObj != null)
+            {
+                if (!isInventory)
+                {
+                    isDragged = true;
+                    moveToSlot = indexNum;
+                    Hotbar[indexNum] = null;
+                    data = passingObj;
+                    ReloadHotbar();
+                    hotabrSlots[indexNum].gameObject.GetComponent<Slot>().Objdata = null;
 
-            TempDragObj = Instantiate(DraggingSprite, DraggingSprite.transform.position,
-                DraggingSprite.transform.rotation);
-            TempDragObj.transform.SetParent(Canvas.transform);
-            TempDragObj.GetComponent<Image>().sprite = data.sprite;
+                    TempDragObj = Instantiate(DraggingSprite, DraggingSprite.transform.position,
+                        DraggingSprite.transform.rotation);
+                    TempDragObj.transform.SetParent(Canvas.transform);
+                    TempDragObj.GetComponent<Image>().sprite = data.sprite;
+                    isInventory = false;
+                }
+                else
+                {
+                    isDragged = true;
+                    moveToSlot = indexNum;
+                    Inventory[indexNum] = null;
+                    data = passingObj;
+                    ReloadInventory();
+                    inventorySlots[indexNum].gameObject.GetComponent<Slot>().Objdata = null;
+
+                    TempDragObj = Instantiate(DraggingSprite, DraggingSprite.transform.position,
+                        DraggingSprite.transform.rotation);
+                    TempDragObj.transform.SetParent(Canvas.transform);
+                    TempDragObj.GetComponent<Image>().sprite = data.sprite;
+                    isInventory = true;
+                }
+            }
         }
         else
         {
-            isDragged = false;
-            moveToSlot = -1;
-            Hotbar[indexNum] = data;
-            hotabrSlots[indexNum].gameObject.GetComponent<Slot>().Objdata = data;
-            data = null;
-            ReloadHotbar();
-            Destroy(TempDragObj);
-            TempDragObj = null;
+            if (!isInventory)
+            {
+                isDragged = false;
+                moveToSlot = -1;
+                Hotbar[indexNum] = data;
+                hotabrSlots[indexNum].gameObject.GetComponent<Slot>().Objdata = data;
+                data = null;
+                ReloadHotbar();
+                Destroy(TempDragObj);
+                TempDragObj = null;
+            }
+            else
+            {
+                isDragged = false;
+                moveToSlot = -1;
+                Inventory[indexNum] = data;
+                inventorySlots[indexNum].gameObject.GetComponent<Slot>().Objdata = data;
+                data = null;
+                ReloadInventory();
+                Destroy(TempDragObj);
+                TempDragObj = null;
+            }
         }
     }
 

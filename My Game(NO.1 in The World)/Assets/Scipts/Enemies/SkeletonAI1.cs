@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 public class SkeletonAI1 : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class SkeletonAI1 : MonoBehaviour
     private PlayerData data;
     public float minDamage;
     public float maxDamage;
+
+    public Slider healthSlider;
+
+    public float maxHealth;
+    public float health;
     
 
     private bool isAttacking = false;
@@ -23,6 +29,9 @@ public class SkeletonAI1 : MonoBehaviour
     {
         nav = GetComponent<NavMeshAgent>();
         data = FindObjectOfType<PlayerData>();
+        healthSlider.maxValue = maxHealth;
+        health = maxHealth;
+        healthSlider.value = health;
     }
 
     public void Update()
@@ -42,6 +51,12 @@ public class SkeletonAI1 : MonoBehaviour
             anim.SetBool("Attack", false);
             isAttacking = false;
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        healthSlider.value = health;
     }
 
     IEnumerator Attack()

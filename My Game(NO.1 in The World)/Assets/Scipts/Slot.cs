@@ -12,6 +12,8 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     private PlayerData data;
 
+    public bool isInventory = true;
+
     private void Awake()
     {
         data = FindObjectOfType<PlayerData>();
@@ -19,7 +21,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        data.DragItem(slotNumber, Objdata);
+        data.DragItem(slotNumber, Objdata, isInventory);
     }
     
 }

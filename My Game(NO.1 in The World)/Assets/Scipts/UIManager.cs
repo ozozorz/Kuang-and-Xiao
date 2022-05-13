@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             if (data.isDragged)
             {
-               data.DragItem(data.moveToSlot, data.data);
+               data.DragItem(data.moveToSlot, data.data, data.isInInventory);
             }
          }
       }
