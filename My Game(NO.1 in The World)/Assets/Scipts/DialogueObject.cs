@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
       [Header("Dialogue objects")] 
       public DialogueOBJ dialogue1;
       public DialogueOBJ dialogue1o5;
+      public DialogueOBJ dialogue1o6;
 
       [Header("NPCS")] 
       public Npc1 npc1;
@@ -51,6 +52,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                PlayDialogue(dialogue1o5);
                curDialogue = dialogue1o5;
                break;
+            case 1.6f:
+               PlayDialogue(dialogue1o6);
+               curDialogue = dialogue1o6;
+               break;
 
          }
       }
@@ -72,7 +77,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                case 1:
                   npc1.hasTalked = true;
                   npc1.isInDialogue = false;
-                  obj.StartNewQuest(obj.questObs[0]);
+                  obj.StartNewQuest(obj.questObjs[0]);
                   break;
                case 1.5f:
                   npc1.isInDialogue = false;

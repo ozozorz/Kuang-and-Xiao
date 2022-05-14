@@ -27,6 +27,7 @@ public class SkeletonAI1 : MonoBehaviour
     public float updateTime = 0;
     public void Start()
     {
+        player = GameObject.Find("Player");
         nav = GetComponent<NavMeshAgent>();
         data = FindObjectOfType<PlayerData>();
         healthSlider.maxValue = maxHealth;

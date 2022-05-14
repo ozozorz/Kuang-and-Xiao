@@ -62,6 +62,7 @@
      <Compile Include="Assets\BasicBandit\DemoSceneBasicBandit\Scripts\ButtonFunction.cs" />
      <Compile Include="Assets\Scipts\DialogueObject.cs" />
      <Compile Include="Assets\Scipts\NPCS\Npc1.cs" />
+     <Compile Include="Assets\Scipts\WeaponScript.cs" />
      <Compile Include="Assets\Scipts\Enemies\SkeletonAI1.cs" />
      <Compile Include="Assets\Scipts\ObjectData.cs" />
      <Compile Include="Assets\Scipts\UIManager.cs" />
@@ -69,11 +70,12 @@
      <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
+     <Compile Include="Assets\Scipts\Hitbox.cs" />
      <Compile Include="Assets\BasicBandit\DemoSceneBasicBandit\Scripts\MovementCamera.cs" />
      <Compile Include="Assets\Scipts\QuestObj.cs" />
      <Compile Include="Assets\SimpleSkeletonFree\Script\Character\PlayerController.cs" />
-     <Compile Include="Assets\Scipts\WeaponScript.cs" />
-     <Compile Include="Assets\Scipts\Hitbox.cs" />
+     <Compile Include="Assets\Scipts\QuestObjects\quest01Script.cs" />
+     <Compile Include="Assets\Scipts\QuestObjects\quest01gateOpener.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
