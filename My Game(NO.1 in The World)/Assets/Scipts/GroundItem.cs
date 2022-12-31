@@ -4,61 +4,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GroundItem : MonoBehaviour
+namespace UnityStandardAssets.Characters.FirstPerson
 {
-   public TextMeshProUGUI triggerText;
-   public new string Name;
-   public ObjectData pickupItem;
-
-   private PlayerData data;
-
-   private bool isPickedUp;
-
-   public GameObject Parent;
-   
-   private void Start()
+   public class GroundItem : MonoBehaviour
    {
-      data = FindObjectOfType<PlayerData>();
-      triggerText = data.triggertext;
-   }
+      public TextMeshProUGUI triggerText;
+      public new string Name;
+      public ObjectData pickupItem;
 
-   private void OnTriggerStay(Collider other)
-   {
-      if (other.tag == "Player")
+      private PlayerData data;
+
+      private bool isPickedUp;
+
+      public GameObject Parent;
+
+      private void Start()
       {
+         data = FindObjectOfType<PlayerData>();
+         triggerText = data.triggertext;
+      }
 
-         if (!isPickedUp)
+      private void OnTriggerStay(Collider other)
+      {
+         if (other.tag == "Player")
          {
-            triggerText.gameObject.SetActive(true);
-         }
 
-         triggerText.text = "Press E to pick up " + Name;
-         if (Input.GetKeyDown(KeyCode.E))
-         {
-            for (int i = 0; i < data.Hotbar.Length; i++)
+            if (!isPickedUp)
             {
-               if (data.Hotbar[i] == null)
-               {
-                  data.Hotbar[i] = pickupItem;
-                  data.hotabrSlots[i].gameObject.GetComponent<Slot>().Objdata = pickupItem;
-                  triggerText.gameObject.SetActive(false);
-                  i = data.Hotbar.Length + 1;
-                  isPickedUp = true;
-                  data.EquipHotbar();
-                  Destroy(Parent);
-               }
+               triggerText.gameObject.SetActive(true);
             }
 
-            data.ReloadHotbar();
+            triggerText.text = "Press E to pick up " + Name;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+               for (int i = 0; i < data.Hotbar.Length; i++)
+               {
+                  if (data.Hotbar[i] == null)
+                  {
+                     data.Hotbar[i] = pickupItem;
+                     data.hotbarSlots[i].gameObject.GetComponent<Slot>().Objdata = pickupItem;
+                     triggerText.gameObject.SetActive(false);
+                     i = data.Hotbar.Length + 1;
+                     isPickedUp = true;
+                     data.EquipHotbar();
+                     Destroy(Parent);
+                  }
+               }
+
+               data.ReloadHotbar();
+            }
          }
       }
-   }
 
-   private void OnTriggerExit(Collider other)
-   {
-      if (other.tag == "Player")
+      private void OnTriggerExit(Collider other)
       {
-         triggerText.gameObject.SetActive(false);
+         if (other.tag == "Player")
+         {
+            triggerText.gameObject.SetActive(false);
+         }
       }
    }
 }

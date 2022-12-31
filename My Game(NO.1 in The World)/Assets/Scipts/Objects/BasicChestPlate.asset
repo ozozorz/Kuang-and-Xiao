@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dff4179f65463f428560a479a9f2d55, type: 3}
+  m_Name: BasicChestPlate
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
+  weaponPrefab: {fileID: 6459369587527332347, guid: a99d016c885d077408ea6ab064e395cb, type: 3}
+  groundItem: {fileID: 7937192742322395911, guid: 0e2fc51b6f3d468428fb2d608ae38a7f, type: 3}
+  AttackSpeed: 0
+  AttackDamage: 0
+  ArmourValue: 30
+  itemType: Chestplate

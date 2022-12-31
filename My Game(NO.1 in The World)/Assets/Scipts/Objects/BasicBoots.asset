@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dff4179f65463f428560a479a9f2d55, type: 3}
+  m_Name: BasicBoots
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: e420c5bc93cb2604695a893500c897e3, type: 3}
+  weaponPrefab: {fileID: 8033437766400218624, guid: 7d500e0eab6ed824d86b958d6eb1dec4, type: 3}
+  groundItem: {fileID: 1396814886580013973, guid: 96749913890d3b84cb5d201a76c8567a, type: 3}
+  AttackSpeed: 0
+  AttackDamage: 0
+  ArmourValue: 10
+  itemType: Boots

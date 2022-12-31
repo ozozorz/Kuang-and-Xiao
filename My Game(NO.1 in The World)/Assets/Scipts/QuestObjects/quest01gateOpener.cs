@@ -4,50 +4,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class quest01gateOpener : MonoBehaviour
+namespace UnityStandardAssets.Characters.FirstPerson
 {
-    public Animator anim;
-    public GameObject triggerText;
-
-    public PlayerData data;
-
-    private void Start()
+    public class quest01gateOpener : MonoBehaviour
     {
-        data = FindObjectOfType<PlayerData>();
-    }
+        public Animator anim;
+        public GameObject triggerText;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player" && data.questNumber == 1)
+        public PlayerData data;
+
+        private void Start()
         {
-            triggerText.SetActive(true);
-            triggerText.GetComponent<TextMeshProUGUI>().text = "Press E to open gate";
+            data = FindObjectOfType<PlayerData>();
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player" && data.questNumber == 1)
+        private void OnTriggerEnter(Collider other)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (other.tag == "Player" && data.questNumber == 1)
             {
-                openGate();
+                triggerText.SetActive(true);
+                triggerText.GetComponent<TextMeshProUGUI>().text = "Press E to open gate";
             }
         }
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
+        private void OnTriggerStay(Collider other)
         {
-            triggerText.SetActive(false);
+            if (other.tag == "Player" && data.questNumber == 1)
+            {
+                if (Input.GetKey(KeyCode.E))
+                {
+                    openGate();
+                }
+            }
         }
-    }
 
-    void openGate()
-    {
-        anim.enabled = true;
-        triggerText.SetActive(false);
-        Destroy(gameObject);
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                triggerText.SetActive(false);
+            }
+        }
+
+        void openGate()
+        {
+            anim.enabled = true;
+            triggerText.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
   groundItem: {fileID: 123527859054108871, guid: 7915e5a711b561f42b0f58e1e41be0f7, type: 3}
   AttackSpeed: 0.35
   AttackDamage: 15
+  itemType: Weapon
