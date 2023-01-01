@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -10,14 +11,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
       public GameObject DialgoueObj;
       public GameObject HotbarObj;
       public GameObject InventorySystem;
+      public GameObject Equipmentbar;
+      public GameObject Chestbar;
+      public GameObject uiButton;
       public GameObject DeathScreenObj;
       public GameObject EscapeScreenObj;
       public GameObject StatsPanel;
       public GameObject naviPanel;
       
       private PlayerData data;
-      public GameObject player;
       private RigidbodyFirstPersonController rigid;
+
+      public Image[] chestImages;
 
       private void Start()
       {

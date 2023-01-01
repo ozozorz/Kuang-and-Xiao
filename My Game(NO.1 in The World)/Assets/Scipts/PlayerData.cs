@@ -40,6 +40,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public Color equippedColor;
         public Color normalColor;
 
+        private List<Vector3> chestPositionList;
+
         [Header("StatsText")]
         public TextMeshProUGUI AttackPowerText;
         public TextMeshProUGUI MagicPowerText;
@@ -77,6 +79,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public TextMeshProUGUI triggertext;
 
         private GameObject CurrentEquipped;
+
+        public GameObject PlayerChest;
 
         private float manaTimer = 0;
 
@@ -153,6 +157,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     var ObjectsPrefs = PlayerPrefs.GetInt("inventory" + i.ToString());
                     Inventory[i] = Allitems.itemOBJ[ObjectsPrefs].data;
                     inventorySlots[i].gameObject.GetComponent<Slot>().Objdata = Allitems.itemOBJ[ObjectsPrefs].data;
+                }
+            }
+
+            chestPositionList = saveSystem.loadChest();
+            if (chestPositionList != null)
+            {
+                foreach (var positionVar in chestPositionList)
+                {
+                    Instantiate(PlayerChest, positionVar, transform.rotation);
                 }
             }
         }
@@ -282,7 +295,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Time.timeScale = 1;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            Application.LoadLevel("StartingVillage");
+            SceneManager.LoadScene("StartingVillage");
         }
 
         public void ReloadHotbar()

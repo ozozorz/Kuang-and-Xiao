@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 public enum variableType
@@ -19,6 +20,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private Transform transformVar;
         public items AllItems;
         public ChestScript ChestScript;
+
+        StringBuilder ChestList = new StringBuilder(" ");
+        private string[] ChestListString;
+        private List<Vector3> ChestPositionList = new List<Vector3>();
 
         private void Start()
         {
@@ -171,13 +176,40 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        public void checkChest(Transform transform)
+        public List<Vector3> loadChest()
         {
-            var Chestx = transform.position.x;
-            var Chesty = transform.position.y;
-            var Chestz = transform.position.z;
+            if (PlayerPrefs.HasKey("savedChest"))
+            {
+                ChestListString = PlayerPrefs.GetString("savedChest").Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                
+                foreach (var positionVar in ChestListString)
+                {
+                    if (PlayerPrefs.HasKey(positionVar + "x"))
+                    {
+                        ChestPositionList.Add(new Vector3(PlayerPrefs.GetFloat(positionVar + "x"), 
+                            PlayerPrefs.GetFloat(positionVar + "y"),PlayerPrefs.GetFloat(positionVar + "z")));
+                    }
+                }
+            }
+            return ChestPositionList;
+        }
+
+        public void checkChest(Vector3 position)
+        {
+            var Chestx = position.x;
+            var Chesty = position.y;
+            var Chestz = position.z;
             
             PlayerPrefs.SetInt((Chestx + Chesty + Chestz).ToString(), ChestScript.ChestNumber);
+            PlayerPrefs.SetFloat(ChestScript.ChestNumber + "x", Chestx);
+            PlayerPrefs.SetFloat(ChestScript.ChestNumber + "y", Chesty);
+            PlayerPrefs.SetFloat(ChestScript.ChestNumber + "z", Chestz);
+            if (PlayerPrefs.HasKey("savedChest"))
+            {
+                StringBuilder ChestList = new StringBuilder(PlayerPrefs.GetString("savedChest"));
+            }
+            ChestList.Append(ChestScript.ChestNumber + " ");
+            PlayerPrefs.SetString("savedChest", ChestList.ToString());
         }
     }
 }

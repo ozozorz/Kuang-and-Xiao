@@ -11,12 +11,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public GameObject triggerText;
         public GameObject DialogueObject;
         public RigidbodyFirstPersonController rigid;
+        
         public bool hasTalked = false;
         public bool isInDialogue = false;
+        private bool hasGottenSword = false;
+        private bool isClose= false;
+
         public string npcName;
+        
         private PlayerData data;
         public ObjectData woodenSword;
-        private bool hasGottenSword = false;
         private QuestObj obj;
 
         private void Start()
@@ -25,12 +29,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
             obj = FindObjectOfType<QuestObj>();
         }
 
-        private void OnTriggerStay(Collider other)
+        private void Update()
         {
-            if (other.gameObject.tag == "Player" && !isInDialogue)
+            if (isClose)
             {
-
-
                 triggerText.SetActive(true);
                 triggerText.GetComponent<TextMeshProUGUI>().text = "Press E to talk to " + npcName;
                 if (Input.GetKeyDown(KeyCode.E))
@@ -38,13 +40,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     triggerText.SetActive(true);
                     if (!hasTalked)
                     {
-                        other.gameObject.GetComponent<PlayerData>().DialogueNumber = 1;
+                        data.DialogueNumber = 1;
                         DialogueObject.SetActive(true);
                         rigid.enabled = false;
                         Cursor.lockState = CursorLockMode.None;
                         Cursor.visible = true;
                         triggerText.SetActive(false);
-                        other.gameObject.GetComponent<PlayerData>().questNumber = 1;
+                        data.questNumber = 1;
                     }
                     else
                     {
@@ -58,7 +60,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
                         if (!hasGottenSword)
                         {
-                            other.gameObject.GetComponent<PlayerData>().DialogueNumber = 1.5f;
+                            data.DialogueNumber = 1.5f;
                             DialogueObject.SetActive(true);
                             rigid.enabled = false;
                             Cursor.lockState = CursorLockMode.None;
@@ -67,24 +69,36 @@ namespace UnityStandardAssets.Characters.FirstPerson
                         }
                         else
                         {
-                            other.gameObject.GetComponent<PlayerData>().questNumber = -1;
-                            other.gameObject.GetComponent<PlayerData>().DialogueNumber = 1.6f;
+                            data.questNumber = -1;
+                            data.DialogueNumber = 1.6f;
                             obj.target = null;
                             DialogueObject.SetActive(true);
                             rigid.enabled = false;
                             Cursor.lockState = CursorLockMode.None;
                             Cursor.visible = true;
                             triggerText.SetActive(false);
-                            
+
                         }
                     }
                 }
             }
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Player" && !isInDialogue)
+            {
+                isClose = true;
+            }
+        }
+
         private void OnTriggerExit(Collider other)
         {
-            triggerText.SetActive(false);
+            if (other.gameObject.tag == "Player")
+            {
+                triggerText.SetActive(false);
+                isClose = false;
+            }
         }
     }
 }

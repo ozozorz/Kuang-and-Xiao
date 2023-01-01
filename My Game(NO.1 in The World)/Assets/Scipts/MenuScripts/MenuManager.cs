@@ -16,7 +16,13 @@ public class MenuManager : MonoBehaviour
 
     public void NewGame()
     {
-        Application.LoadLevel("StartingVillage");
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("StartingVillage");
+    }
+
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("StartingVillage");
     }
 
     public void Quit()

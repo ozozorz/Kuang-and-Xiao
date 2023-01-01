@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scipts\QuestObjects\quest01Script.cs" />
+     <Compile Include="Assets\Scipts\SaveSystem.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
      <Compile Include="Assets\Scipts\QuestObjects\quest01gateOpener.cs" />
      <Compile Include="Assets\Scipts\PlayerData.cs" />
@@ -49,13 +50,14 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\LevelReset.cs" />
-     <Compile Include="Assets\Scipts\GroundItem.cs" />
+     <Compile Include="Assets\Scipts\ItemUse\GroundItem.cs" />
      <Compile Include="Assets\BasicBandit\DemoSceneBasicBandit\Scripts\ButtonFunction.cs" />
      <Compile Include="Assets\Scipts\DialogueObject.cs" />
+     <Compile Include="Assets\Scipts\Objects\items.cs" />
      <Compile Include="Assets\Scipts\NPCS\Npc1.cs" />
-     <Compile Include="Assets\Scipts\WeaponScript.cs" />
+     <Compile Include="Assets\Scipts\ItemUse\WeaponScript.cs" />
      <Compile Include="Assets\Scipts\Enemies\SkeletonAI1.cs" />
-     <Compile Include="Assets\Scipts\Food.cs" />
+     <Compile Include="Assets\Scipts\ItemUse\Food.cs" />
      <Compile Include="Assets\Scipts\ObjectData.cs" />
      <Compile Include="Assets\Scipts\UIManager.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
@@ -64,12 +66,11 @@
      <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
      <Compile Include="Assets\Scipts\Hitbox.cs" />
      <Compile Include="Assets\BasicBandit\DemoSceneBasicBandit\Scripts\MovementCamera.cs" />
-     <Compile Include="Assets\Scipts\ChestScript.cs" />
+     <Compile Include="Assets\Scipts\ItemUse\ChestScript.cs" />
      <Compile Include="Assets\Scipts\MenuScripts\MenuManager.cs" />
      <Compile Include="Assets\Scipts\QuestObj.cs" />
      <Compile Include="Assets\SimpleSkeletonFree\Script\Character\PlayerController.cs" />
-     <Compile Include="Assets\Scipts\SaveSystem.cs" />
-     <Compile Include="Assets\Scipts\Objects\items.cs" />
+     <Compile Include="Assets\Scipts\ItemUse\ChestUse.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Prefabs\Armour\Legs" />
      <Folder Include="Assets\Mega Fantasy Props Pack\Example Scenes\Prefabs" />
@@ -199,6 +200,7 @@
      <Folder Include="Assets\Mega Fantasy Props Pack\Textures" />
      <Folder Include="Assets\Mega Fantasy Props Pack\FBX" />
      <Folder Include="Assets\Mega Fantasy Props Pack\Prefabs\Castle walls\Short" />
+     <Folder Include="Assets\Scipts\ItemUse" />
      <Folder Include="Assets\Mega Fantasy Props Pack\Prefabs\Walls" />
      <Folder Include="Assets\Mega Fantasy Props Pack\Prefabs\Castle walls" />
      <Folder Include="Assets\BasicBandit\DemoSceneBasicBandit\Scripts" />

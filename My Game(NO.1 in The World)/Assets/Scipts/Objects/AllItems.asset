@@ -31,3 +31,6 @@ MonoBehaviour:
   - name: Eggs
     tooltip: 
     data: {fileID: 11400000, guid: 0b6ba538299e9064c88d9a3fbcee72fb, type: 2}
+  - name: Chest
+    tooltip: 
+    data: {fileID: 11400000, guid: b708f8fe54862be47b08fc7458be8050, type: 2}
